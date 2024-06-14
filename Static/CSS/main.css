@@ -1,0 +1,138 @@
+body{
+    margin:0;
+    font-family: 'Arial', sans-serif;
+    padding: 10px;               
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+} 
+
+.container {
+    margin-top: 2rem;
+}
+
+.display-4 {
+    font-family: 'Cursive', sans-serif;
+    color: #0062E6;
+    
+}
+
+.styled-heading {
+    font-family: 'Cursive', sans-serif;
+    text-decoration: underline;
+    color: #6d6d6d;
+    margin-bottom: 1rem;
+    font-size: 2px; 
+}
+
+.btn-primary {
+    background-color: #0062E6;
+    border-color: #0062E6;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+table{
+    margin-top: 30px;
+    width: 80%;
+    border-collapse: collapse;
+    border: 1px solid black;
+
+}
+
+.table-container{
+    margin-left: auto;
+    margin-right: auto;
+
+
+} /* Applys styles toable container */
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 8px;
+}
+
+th{
+    font-weight: bolder;
+    text-decoration: underline;
+    text-shadow: 7px 7px 7px black;
+}
+
+.centered{  /* selector */
+
+    width: 50%; /* sets the width of the <div> to 50% of its parent container's width. */
+    margin: 0 auto; /* property to horizontally center a <div> */ 
+    /* controls the space around an element. 0 sets the top and bottom margins , while auto sets the left and right margins to automatically distribute space equally. */
+
+
+}
+
+.navbar {
+    background: linear-gradient(90deg, #0062E6, #33AEFF);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-item .nav-link {
+    margin-right: 1rem;
+    font-size: 1.1rem;
+}
+
+.navbar-toggler {
+    border-color: #33AEFF;
+}
+
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.alert {
+    text-align: center;
+}
+
+.container {
+    margin-top: 2rem;
+}
+
+.notification-box {
+    position: fixed;
+    bottom: -100px; /* Start hidden below the viewport */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+.notification-box.show {
+    bottom: 20px; /* Visible position */
+    opacity: 1;
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem 0;
+    background-color: #343a40;
+    color: white;
+}
+
+.btn-close {
+    color: white;
+}
+

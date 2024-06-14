@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+
+
+{% block head %} 
+<title>Homepage</title>
+<h1 class="display-4 text-center styled-heading">Simple Task Manager Demo</h1>
+
+
+{% endblock %} 
+
+
+
+
+
+
+{% block body %} 
+
+<div class="container text-center mt-5">
+    <h1 class="display-4">Are You Ready To Get Organized?</h1>
+    <a href="/login/" class="btn btn-primary btn-lg mt-4">Please Login</a>
+</div>
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Add a New Task</h2>
+    <form action="/create_task" method="POST" class="d-flex flex-column align-items-center">
+        <div class="row mb-3 w-75">
+            <div class="col">
+                <input type="text" name="title" class="form-control" placeholder="Task Title" required>
+            </div>
+        </div>
+        <div class="row mb-3 w-75">
+            <div class="col">
+                <textarea name="description" class="form-control" placeholder="Task Description" rows="3" required></textarea>
+            </div>
+        </div>
+        <div class="row w-75">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary w-50">Add Task</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Your Tasks</h2>
+    <ul class="list-group">
+        {% for task in tasks %}
+        <li class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h5>{{ task.title }}</h5>
+                    <p>{{ task.description }}</p>
+                </div>
+                <div>
+                    <button class="btn btn-warning btn-sm me-2" onclick="showUpdateForm({{ task.id }}, '{{ task.title }}', '{{ task.description }}')">Update</button>
+                    <form action="/delete_task/{{ task.id }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Update Task Modal -->
+<div class="modal fade" id="updateTaskModal" tabindex="-1" aria-labelledby="updateTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="updateTaskForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateTaskModalLabel">Update Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" name="title" id="updateTaskTitle" class="form-control" placeholder="Task Title" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="description" id="updateTaskDescription" class="form-control" placeholder="Task Description" rows="3" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Update Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showUpdateForm(taskId, taskTitle, taskDescription) {
+        document.getElementById('updateTaskForm').action = '/update_task/' + taskId;
+        document.getElementById('updateTaskTitle').value = taskTitle;
+        document.getElementById('updateTaskDescription').value = taskDescription;
+        var updateTaskModal = new bootstrap.Modal(document.getElementById('updateTaskModal'));
+        updateTaskModal.show();
+    }
+
+    function showNotification() {
+        var notificationBox = document.getElementById('notificationBox');
+        notificationBox.classList.add('show');
+        setTimeout(function() {
+            notificationBox.classList.remove('show');
+        }, 3000); // Hide after 3 seconds
+    }
+
+    // Call showNotification when the page loads
+    window.onload = function() {
+        showNotification();
+    }
+</script>
+
+{% endblock %}
