@@ -1,138 +1,181 @@
-body{
-    margin:0;
-    font-family: 'Arial', sans-serif;
-    padding: 10px;               
-    text-align: center;
-    justify-content: center;
+/* Resetting margins, paddings, and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Night sky background with radiant deep blue gradient */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #001f3f, #003366, #000080);
+    color: #ffffff; /* Default text color to white for contrast */
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    text-align: center;
-    
-} 
+    min-height: 100vh;
+    margin: 0;
+}
 
+/* Glass effect container styling */
 .container {
-    margin-top: 2rem;
-}
-
-.display-4 {
-    font-family: 'Cursive', sans-serif;
-    color: #0062E6;
-    
-}
-
-.styled-heading {
-    font-family: 'Cursive', sans-serif;
-    text-decoration: underline;
-    color: #6d6d6d;
-    margin-bottom: 1rem;
-    font-size: 2px; 
-}
-
-.btn-primary {
-    background-color: #0062E6;
-    border-color: #0062E6;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
-table{
     margin-top: 30px;
-    width: 80%;
-    border-collapse: collapse;
-    border: 1px solid black;
-
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white for glass effect */
+    backdrop-filter: blur(10px); /* Glass effect blur */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for glass effect */
 }
 
-.table-container{
-    margin-left: auto;
-    margin-right: auto;
-
-
-} /* Applys styles toable container */
-
-th, td {
-    border: 1px solid black;
-    text-align: center;
-    padding: 8px;
-}
-
-th{
-    font-weight: bolder;
-    text-decoration: underline;
-    text-shadow: 7px 7px 7px black;
-}
-
-.centered{  /* selector */
-
-    width: 50%; /* sets the width of the <div> to 50% of its parent container's width. */
-    margin: 0 auto; /* property to horizontally center a <div> */ 
-    /* controls the space around an element. 0 sets the top and bottom margins , while auto sets the left and right margins to automatically distribute space equally. */
-
-
-}
-
+/* Navbar styling for dark theme */
 .navbar {
-    background: linear-gradient(90deg, #0062E6, #33AEFF);
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black for navbar */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
 }
 
 .navbar-brand {
+    color: #ffffff;
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.navbar-nav .nav-item .nav-link {
-    margin-right: 1rem;
-    font-size: 1.1rem;
+.nav-link {
+    color: #cccccc;
+    padding: 8px 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
 }
 
 .navbar-toggler {
-    border-color: #33AEFF;
+    border-color: transparent;
 }
 
-.navbar-toggler .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-
-.alert {
-    text-align: center;
-}
-
-.container {
-    margin-top: 2rem;
-}
-
-.notification-box {
-    position: fixed;
-    bottom: -100px; /* Start hidden below the viewport */
+/* Popup message styling */
+.popup-message {
+    position: fixed; /* Ensure the popup is fixed to the viewport */
+    bottom: -100%; /* Start off-screen */
     left: 50%;
     transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    color: #333; /* Ensure text is visible */
+    font-size: 16px; /* Adjust font size for readability */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: bottom 0.5s ease-out, opacity 0.5s ease-out; /* Smooth animation */
+    opacity: 0; /* Start transparent */
+    visibility: hidden; /* Initially hidden */
+    z-index: 9999; /* High z-index to appear on top of everything */
+}
+
+.popup-message.show {
+    bottom: 50%; /* Move to the middle of the screen */
+    opacity: 1; /* Fully visible */
+    visibility: visible;
+}
+
+/* Close button styling */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+
+
+/* Footer styling with smaller font and lighter color */
+.footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 20px 0;
+    background-color: transparent;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #bbbbbb;
+}
+
+/* Button styling for consistency with dark theme */
+.btn-primary {
     background-color: #007bff;
-    color: white;
-    padding: 15px 30px;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-    font-size: 0.9rem;
-    z-index: 1000;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
-}
-
-.notification-box.show {
-    bottom: 20px; /* Visible position */
-    opacity: 1;
-}
-
-footer {
-    margin-top: 2rem;
-    padding: 1rem 0;
-    background-color: #343a40;
+    padding: 10px 15px;
+    font-size: 16px;
     color: white;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
 }
 
-.btn-close {
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-danger {
+    background-color: #ff4d4d;
+    border: none;
     color: white;
+    transition: background-color 0.3s ease;
 }
 
+.btn-danger:hover {
+    background-color: #cc0000;
+}
+
+/* Form input and textarea styling */
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #ffffff;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+/* Task list styling */
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        margin: 20px;
+    }
+}

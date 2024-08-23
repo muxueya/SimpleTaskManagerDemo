@@ -1,67 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">              <!-- define character set-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated to Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
-
-    <!-- Bootstrap CSS, needed for navbar stlying -->
-    <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-    crossorigin="anonymous"
-    />
-    <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    crossorigin="anonymous"
-    /> 
-   
-    
-    
-    {% block head %} 
-    
-    {% endblock %}   
-
-
+    {% block head %}
+    {% endblock %}
 </head>
-
-
-<!--Background color for login page-->
-<style>    
-    body{
-        background-color:rgb(255, 255, 255);
- 
-    }
- </style>
-
-
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
-        <div class="container">
-            <a class="navbar-brand" href="#">Task Manager</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Redesigned Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Task Manager</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbar">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" id="home" href="/home/">Home</a>
+                        <a class="nav-link" href="/home/">Home</a>
                     </li>
                     {% if not session.get('login') %}
                         <li class="nav-item">
-                            <a class="nav-link" id="login" href="/login/">Login</a>
+                            <a class="nav-link" href="/login/">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="register" href="/register/">Register</a>
+                            <a class="nav-link" href="/register/">Register</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" id="logout" href="/logout/">Logout</a>
+                            <a class="nav-link" href="/logout/">Logout</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -69,68 +39,28 @@
         </div>
     </nav>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} 
-    {% if messages %} 
-        {% for category, message in messages %} 
-        {% if category =='error' %}
-        <div class="container">
-            <div class="row justify-content-center" ></div>
-                <div class="alert alert-danger alter-dismissable fade show" role="alert" style="text-align: center; " > <!-- alert-danger shows msg in red-->
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-            </div>
-        </div>
-        {% else %}
-        <div class="container">
-            <div class="row justify-content-center" ></div>
-                <div class="alert alert-success alter-dismissable fade show" role="alert" style="text-align: center;">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert">
-                    <span aria-hidden="true">&times;</span> <!--image inside button-->
-                </button>
-                </div>
-            </div>
-        </div>
-        {% endif %} 
-        {% endfor %} 
-    {% endif %} 
-    {% endwith %}
-    
     <div class="container">
-        {%block content%}       <!--content to float near navbar, like text-->
-        {%endblock%}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
     </div>
 
+    <!-- Footer at the bottom with light grey text -->
+    <footer class="footer">
+        <p>Simple Task Manager Demo</p>
+    </footer>
 
-    <br>
-
-    {% block body %} 
-    
-    {% endblock %}
-
-    
-    <center> <small class="mt-5"><i>©Jialei Qian</i></small></center>
-
-
-    <!-- Bootstrap JS, popper, jquery needed for navbar stlying/functionality -->
-    <script
-    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"
-    ></script>
-    <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"
-    ></script>
-    <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"
-    ></script>
-
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
